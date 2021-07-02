@@ -70,7 +70,7 @@ class KegControl extends React.Component {
 
   handlePintsInKeg = () => {
     const selectedKeg = this.state.selectedKeg;
-    const reducedKeg = Object.assign({}, selectedKeg, { stock: parseInt(selectedKeg.pints) - 1 });
+    const reducedKeg = Object.assign({}, selectedKeg, { pints: parseInt(selectedKeg.pints) - 1 });
     const newMasterKegList = this.state.masterKegList
       .filter(keg => keg.id !== this.state.selectedKeg.id)
       .concat(reducedKeg);
