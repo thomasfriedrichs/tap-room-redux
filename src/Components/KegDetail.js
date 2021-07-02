@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function KegDetail(props){
+  
   const { keg, onClickingDelete, onClickingPour } = props;
   
   let sellButton; 
@@ -21,7 +22,7 @@ function KegDetail(props){
       <p><em>{keg.style}</em></p>
       <h4>{keg.price}</h4>
       <h4>{keg.abv}</h4>
-      <p>{pintsLeft}</p><button>{sellButton}Sell</button>
+      <p>{pintsLeft}</p>{sellButton}
       <button onClick={ props.onClickingEdit }>Update Keg</button>
       <button onClick={()=> onClickingDelete(keg.id) }>Finish Keg</button>
       <hr/>
