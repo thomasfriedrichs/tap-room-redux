@@ -68,6 +68,18 @@ class KegControl extends React.Component {
       });
   }
 
+  handlePintsInKeg = () => {
+    const selectedKeg = this.state.selectedKeg;
+    const reducedKeg = Object.assign({}, selectedKeg, { stock: parseInt(selectedKeg.pint) - 1 });
+    const newMainKegList = this.state.mainKegList
+      .filter(keg => keg.id !== this.state.selectedKeg.id)
+      .concat(reducedKeg);
+    this.setState({
+      mainKegList: newMainKegList,
+      selectedKeg: reducedKeg
+    });
+  }
+
   render(){
     let currentlyVisibleState = null;
     let buttonText = null; 
