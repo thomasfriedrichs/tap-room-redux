@@ -25,11 +25,15 @@ _This app uses react to manage the on tap beer stock of a bar, bartenders can us
 
 ## Setup/Installation Requirements
 
-* _This is a great place_
-* _to list setup instructions_
-* _in a simple_
-* _easy-to-understand_
-* _format_
+* _You can go to github and copy the clone link from here https://github.com/thomasfriedrichs/tap-room_
+* _Or you can go into your terminal and type ```git clone https://github.com/thomasfriedrichs/tap-room.git```_
+* _Now type ```cd tap-room``` in terminal_
+* _now type ```code .```_
+* _now type ```npm i``` and wait for all packages to install_
+* _now type ```npm run build```_
+* _now type ```npm start```_
+* _now you can check the project out in your browser at http://localhost:3000/_
+
 
 _Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Is there other code this application depends on? We recommend deleting the project from your desktop, re-cloning the project from GitHub, and writing down all the steps necessary to get the project working again._
 
