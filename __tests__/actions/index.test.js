@@ -24,12 +24,21 @@ describe('help queue actions', () => {
   });
 
   it('addKeg should create ADD_KEG action', () => {
-    expect(actions.addKeg({names: 'Jo and Jasmine', location: '3E', issue: 'Redux not working!', timeOpen: 0,
-    formattedWaitTime: "A few seconds", id: 1})).toEqual({
-      type: c.ADD_KEG,
-      names: 'Jo and Jasmine',
-      location: '3E',
-      issue: 'Redux not working!',
+    expect(actions.addKeg({
+      name: 'mannys',
+      brand: 'georgetown',
+      style: 'pale ale',
+      price: 5,
+      abv: '5.4%',
+      pints: 124,
+      timeOpen: 0,
+      formattedWaitTime: "A few seconds", id: 1})).toEqual({
+        name: 'mannys',
+        brand: 'georgetown',
+        style: 'pale ale',
+        price: 5,
+        abv: '5.4%',
+        pints: 124,
       timeOpen: 0,
       formattedWaitTime: "A few seconds",
       id: 1
