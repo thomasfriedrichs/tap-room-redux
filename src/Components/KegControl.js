@@ -3,6 +3,7 @@ import NewKegForm from './NewKegForm';
 import KegList from './KegList';
 import KegDetail from './KegDetail';
 import EditKegForm from './EditKegForm';
+import * as a from ''
 
 
 class KegControl extends React.Component {
@@ -79,6 +80,27 @@ class KegControl extends React.Component {
       selectedKeg: reducedKeg
     });
   }
+
+  componentDidMount() {
+    this.waitTimeUpdateTimer = setInterval(() =>
+      this.updateKegElapsedWaitTime(),
+    60000
+    );
+  }
+
+  componentWillUnmount(){
+    clearInterval(this.waitTimeUpdateTimer);
+  }
+
+  updateKegElapsedWaitTime = () => {
+    const { dispatch } = this.props;
+    Object.values(this.props.masterKegList).forEach(keg => {
+    const newFormattedWaitTime = keg.timeOpen.fromNow(true);
+    const action = a.updateTime(keg.id, newFormattedWaitTime);
+    dispatch(action);
+  });
+  }
+
 
   render(){
     let currentlyVisibleState = null;
