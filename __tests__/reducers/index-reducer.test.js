@@ -27,10 +27,12 @@ describe("rootReducer", () => {
 
   test('Check that ADD_KEG action works for kegListReducer and root reducer', () => {
     const action = {
-      type: c.ADD_KEG,
-      names: 'Ryan & Aimen',
-      location: '4b',
-      issue: 'Redux action is not working correctly.',
+      name: 'mannys',
+      brand: 'georgetown',
+      style: 'pale ale',
+      price: 5,
+      abv: '5.4%',
+      pints: 124,
       id: 1
     }
     store.dispatch(action);

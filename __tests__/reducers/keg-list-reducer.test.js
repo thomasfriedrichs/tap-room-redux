@@ -8,22 +8,32 @@ describe('kegListReducer', () => {
   let action;
 
   const kegData = {
-    names: 'Ryan & Aimen',
-    location: '4b',
-    issue: 'Redux action is not working correctly.',
+    name: 'mannys',
+    brand: 'georgetown',
+    style: 'pale ale',
+    price: 5,
+    abv: '5.4%',
+    pints: 124,
     timeOpen: 0,
     id: 1,
   }
 
   const currentState = {
-    1: {names: 'Ryan & Aimen',
-    location: '4b',
-    issue: 'Redux action is not working correctly.',
-    id: 1 },
-    2: {names: 'Jasmine and Justine',
+    1: {
+    name: 'mannys',
+    brand: 'georgetown',
+    style: 'pale ale',
+    price: 5,
+    abv: '5.4%',
+    pints: 124,
+    id: 1 
+    },
+    2: {
+    name: 'Jasmine and Justine',
     location: '2a',
     issue: 'Reducer has side effects.',
-    id: 2 }
+    id: 2 
+    }
   }
 
   test('Should return default state if there is no action type passed into the reducer', () => {
