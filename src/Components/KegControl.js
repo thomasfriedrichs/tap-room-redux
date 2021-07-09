@@ -3,8 +3,10 @@ import NewKegForm from './NewKegForm';
 import KegList from './KegList';
 import KegDetail from './KegDetail';
 import EditKegForm from './EditKegForm';
-import * as a from ''
-
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import * as a from './../actions';
+import Moment from 'moment';
 
 class KegControl extends React.Component {
 
