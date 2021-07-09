@@ -29,9 +29,12 @@ describe('kegListReducer', () => {
     id: 1 
     },
     2: {
-    name: 'Jasmine and Justine',
-    location: '2a',
-    issue: 'Reducer has side effects.',
+      name: 'rogers',
+      brand: 'georgetown',
+      style: 'pilsner',
+      price: 5,
+      abv: '4.9%',
+      pints: 124,
     id: 2 
     }
   }
@@ -41,12 +44,15 @@ describe('kegListReducer', () => {
   })
 
   test('Should successfully add new keg data to masterKegList', () => {
-    const { names, location, issue, id } = kegData;
+    const { name, brand, style, price, abv, pints, id } = kegData;
     action = {
       type: c.ADD_KEG,
-      names: names,
-      location: location,
-      issue: issue,
+      name: name,
+      brand: brand,
+      style: style,
+      price: price,
+      abv: abv,
+      pints: pints,
       id: id
     };
 
