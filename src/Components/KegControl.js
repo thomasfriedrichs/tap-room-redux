@@ -9,98 +9,78 @@ import * as a from './../actions';
 import Moment from 'moment';
 
 class KegControl extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      formVisibleOnPage: false,
-      masterKegList: [],
-      selectedKeg: null
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
-
+  
   handleClick = () => {
-    if (this.state.selectedKeg != null) {
-      this.setState({
-        formVisibleOnPage: false,
-        selectedKeg: null,
-        editing: false 
-      });
+    if (this.props.selectedKeg != null) {
+      const { dispatch } = this.props;
+      const action = a.deselectKeg();
+      dispatch(action);
+      if(this.props.editing) {
+        const action2 = a.toggleEdit();
+        dispatch(action2);
+      }
     } else {
-      this.setState(prevState => ({
-        formVisibleOnPage: !prevState.formVisibleOnPage,
-      }));
+      const { dispatch } = this.props;
+      const action3 = a.toggleForm();
+      dispatch(action3);
+      };
     }
-  }
 
-  handleDeletingKeg = (id) => {
-    const { dispatch } = this.props;
-    const action = {
-      type: 'DELETE_KEG',
-      id: id
+    handleDeletingKeg = (id) => {
+      const { dispatch } = this.props;
+      const action = a.deleteKeg(id);
+      dispatch(action);
+      const action2 = a.deselectKeg();
+      dispatch(action2);
     }
-    dispatch(action);
-    this.setState({selectedKeg: null});
-  }
+  
 
 
   handleAddingNewKegToList = (newKeg) => {
     const { dispatch } = this.props;
-    const { id, name, brand, style, price, abv} = newKeg;
-    const action = {
-      type: 'ADD_KEG',
-      id: id,
-      name: name,
-      brand: brand,
-      style: style,
-      price: price,
-      abv: abv,
-      pints: 124
-    }
+    const action = a.addKeg(newKeg);
     dispatch(action);
-    this.setState({formVisibleOnPage: false});
+    const action2 = a.toggleForm();
+    dispatch(action2);
   }
 
-  handleChangingSelectedKeg = (id) => {
-    const selectedKeg = this.state.masterKegList.filter(keg => keg.id === id)[0];
-    this.setState({selectedKeg: selectedKeg});
+  handleChangingSelectedKeg = (id) => { 
+    const selectedKeg = this.props.mainKegList[id];
+    const { dispatch } = this.props;
+    const action = a.selectKeg(selectedKeg);
+    dispatch(action);
   }
 
   handleEditClick = () => {
-    this.setState({editing: true});
-  }
-  
-  handleEditingKegInList = (kegToEdit) => {
     const { dispatch } = this.props;
-    const { id, name, brand, style, price, abv, pints} = kegToEdit;
-    const action = {
-      type: 'ADD_KEG',
-      id: id,
-      name: name,
-      brand: brand,
-      style: style,
-      price: price,
-      abv: abv,
-      pints: pints
-    }
+    const action = a.toggleEdit();
     dispatch(action);
-    this.setState({
-      editing: false,
-      selectedKeg: null
-    });
   }
 
-  handlePintsInKeg = () => {
-    const selectedKeg = this.state.selectedKeg;
-    const reducedKeg = Object.assign({}, selectedKeg, { pints: parseInt(selectedKeg.pints) - 1 });
-    const newMasterKegList = this.state.masterKegList
-      .filter(keg => keg.id !== this.state.selectedKeg.id)
-      .concat(reducedKeg);
-    this.setState({
-      mainKegList: newMasterKegList,
-      selectedKeg: reducedKeg
-    });
+  
+  handleEditKegInList = (kegToEdit) => {
+    const { dispatch } = this.props;
+    const action = a.addKeg(kegToEdit);
+    dispatch(action);
+    const action2 = a.deselectKeg();
+    dispatch(action2); 
+    if(this.props.editing) {
+      const action3 = a.toggleEdit();
+      dispatch(action3);
+    }
+  }
+
+
+  handlePintsInKeg = (kegToPour) => {
+    const { dispatch } = this.props;
+    const action = a.pourPint(kegToPour);
+    dispatch(action);
+    const action2 = a.deselectKeg();
+    dispatch(action2);
+    if(this.props.editing) {
+      const action3 = a.toggleEdit();
+      dispatch(action3);
+    }
   }
 
   componentDidMount() {
@@ -128,21 +108,33 @@ class KegControl extends React.Component {
     let currentlyVisibleState = null;
     let buttonText = null; 
     if (this.state.editing ) {      
-      currentlyVisibleState = <EditKegForm keg = {this.state.selectedKeg} onEditKeg = {this.handleEditingKegInList} />;
+      currentlyVisibleState = 
+      <EditKegForm 
+      keg = {this.state.selectedKeg} 
+      onEditKeg = {this.handleEditingKegInList}
+      />;
       buttonText = "Return to Keg List";
-    } else if (this.state.selectedKeg != null) {
+    } else if (this.state.selectedKeg) {
       currentlyVisibleState = 
       <KegDetail
         keg = {this.state.selectedKeg} 
         onClickingDelete = {this.handleDeletingKeg}
         onClickingEdit = {this.handleEditClick}
-        onClickingPour={ this.handlePintsInKeg}/>
+        onClickingPour={ this.handlePintsInKeg}
+      />
       buttonText = "Return to Keg List";
     } else if (this.state.formVisibleOnPage) {
-      currentlyVisibleState = <NewKegForm onNewKegCreation={this.handleAddingNewKegToList} />;
+      currentlyVisibleState = 
+      <NewKegForm 
+      onNewKegCreation={this.handleAddingNewKegToList} 
+      />;
       buttonText = "Return to Keg List";
     } else {
-      currentlyVisibleState = <KegList kegList={this.state.masterKegList} onKegSelection={this.handleChangingSelectedKeg} />;
+      currentlyVisibleState = 
+      <KegList 
+      kegList={this.state.masterKegList} 
+      onKegSelection={this.handleChangingSelectedKeg} 
+      />;
       buttonText = "Add Keg";  
     }
     return (
@@ -152,8 +144,23 @@ class KegControl extends React.Component {
       </React.Fragment>
     );
   }
-
 }
 
-KegControl = connect()(KegControl);
+KegControl.propTypes = {
+  mainKegList: PropTypes.object,
+  formVisibleOnPage: PropTypes.bool,
+  selectedKeg: PropTypes.object,
+  editing: PropTypes.bool
+}
+
+const mapStateToProps = state => {
+  return {
+    mainKegList: state.mainKegList,
+    formVisibleOnPage: state.formVisibleOnPage,
+    selectedKeg: state.selectedKeg,
+    editing: state.editing
+  }
+}
+
+KegControl = connect(mapStateToProps)(KegControl);
 export default KegControl;
