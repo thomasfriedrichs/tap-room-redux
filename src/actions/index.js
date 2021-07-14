@@ -11,7 +11,7 @@ export const toggleForm = () => ({
 });
 
 export const addKeg = (keg) => {
-  const { names, location, issue, id , formattedWaitTime, timeOpen} = keg;
+  const { names, location, issue, id , formattedWaitTime, timeOpen, pints} = keg;
   return {
     type: c.ADD_KEG,
     names: names,
@@ -19,7 +19,8 @@ export const addKeg = (keg) => {
     issue: issue,
     id: id,
     formattedWaitTime: formattedWaitTime,
-    timeOpen: timeOpen
+    timeOpen: timeOpen,
+    pints: pints
   }
 }
 
@@ -27,4 +28,34 @@ export const updateTime = (id, formattedWaitTime) => ({
   type: c.UPDATE_TIME,
   id: id,
   formattedWaitTime: formattedWaitTime
+});
+
+export const pourPint = (keg) => {
+  const { name, brand, price, abv, pints, id } = keg;
+  return {
+    type: c.ADD_KEG,
+    name,
+    brand,
+    price,
+    abv,
+    pints: pints - 1,
+    id
+  }
+};
+
+export const selectKeg = (selectedKeg) => {
+  const { name, brand, price, abv, pint, id } = selectedKeg;
+  return {
+    type: c.SELECT_KEG,
+    name,
+    brand,
+    price,
+    abv,
+    pint,
+    id
+  };
+}
+
+export const deselectKeg = () => ({
+  type: c.DESELECT_KEG
 });
