@@ -1,4 +1,4 @@
-# _Tap Room_
+# _Tap Room Redux_
 
 #### _A keg tracking app for bartenders_
 
@@ -17,11 +17,11 @@
 * _JSX_
 * _npm_
 * _Webpack_
-
+* _Redux_
 
 ## Description
 
-_This app uses react to manage the on tap beer stock of a bar, bartenders can use it to track how full a keg is and other details about the beers on hand._
+_This app uses react and redux to manage the on tap beer stock of a bar, bartenders can use it to track how full a keg is and other details about the beers on hand._
 
 ## Setup/Installation Requirements
 
@@ -34,8 +34,6 @@ _This app uses react to manage the on tap beer stock of a bar, bartenders can us
 * _now type ```npm start```_
 * _now you can check the project out in your browser at http://localhost:3000/_
 
-
-_Leave nothing to chance! You want it to be easy for potential users, employers and collaborators to run your app. Do I need to run a server? How should I set up my databases? Is there other code this application depends on? We recommend deleting the project from your desktop, re-cloning the project from GitHub, and writing down all the steps necessary to get the project working again._
 
 ## Known Bugs
 
