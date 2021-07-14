@@ -1,4 +1,4 @@
-import * as c from './actions/ActionTypes';
+import * as c from './ActionTypes';
 
 
 export const deleteKeg = id => ({
@@ -58,4 +58,8 @@ export const selectKeg = (selectedKeg) => {
 
 export const deselectKeg = () => ({
   type: c.DESELECT_KEG
+});
+
+export const toggleEdit = () => ({
+  type: c.TOGGLE_EDIT
 });

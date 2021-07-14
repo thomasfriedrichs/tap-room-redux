@@ -6,7 +6,6 @@ import EditKegForm from './EditKegForm';
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import * as a from './../actions';
-import Moment from 'moment';
 
 class KegControl extends React.Component {
   
@@ -107,23 +106,23 @@ class KegControl extends React.Component {
   render(){
     let currentlyVisibleState = null;
     let buttonText = null; 
-    if (this.state.editing ) {      
+    if (this.props.editing != null) {      
       currentlyVisibleState = 
       <EditKegForm 
-      keg = {this.state.selectedKeg} 
+      keg = {this.props.selectedKeg} 
       onEditKeg = {this.handleEditingKegInList}
       />;
       buttonText = "Return to Keg List";
-    } else if (this.state.selectedKeg) {
+    } else if (this.props.selectedKeg) {
       currentlyVisibleState = 
       <KegDetail
-        keg = {this.state.selectedKeg} 
+        keg = {this.props.selectedKeg} 
         onClickingDelete = {this.handleDeletingKeg}
         onClickingEdit = {this.handleEditClick}
         onClickingPour={ this.handlePintsInKeg}
       />
       buttonText = "Return to Keg List";
-    } else if (this.state.formVisibleOnPage) {
+    } else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = 
       <NewKegForm 
       onNewKegCreation={this.handleAddingNewKegToList} 
@@ -132,7 +131,7 @@ class KegControl extends React.Component {
     } else {
       currentlyVisibleState = 
       <KegList 
-      kegList={this.state.masterKegList} 
+      kegList={this.props.masterKegList} 
       onKegSelection={this.handleChangingSelectedKeg} 
       />;
       buttonText = "Add Keg";  
